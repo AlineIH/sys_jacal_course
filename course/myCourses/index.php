@@ -1,4 +1,16 @@
-const {
+<?php require_once('../../resources/menuManager/header.php'); ?>
+<div id="app">
+    <div class="card">
+        <div class="card-body">
+            <div class="card-title">Mis cursos</div>
+            <ul class="list-group" v-for="({COU_NAME}, index) in globalData">
+                <li class="list-group-item" >{{ COU_NAME }}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<script>
+    const {
     createApp
 } = Vue
 
@@ -18,7 +30,7 @@ createApp({
     },
     methods: {
         getUsers() {
-            fetch(this.ws + 'userRead', getConfig(3))
+            fetch(this.ws + 'courseUserRead/0   ', getConfig(3))
                 .then(response => response.json())
                 .then(response => {
                     this.globalData = response.response;
@@ -54,3 +66,6 @@ createApp({
     },
 
 }).mount('#app')
+
+</script>
+<?php require_once('../../resources/menuManager/footer.php'); ?>

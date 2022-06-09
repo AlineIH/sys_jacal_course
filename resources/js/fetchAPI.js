@@ -1,9 +1,9 @@
 "use strict";
 
-const getConcierge = new Promise((resolve, reject) => {
-    fetch(`${ ws }/readConcierge/0`).then( resp => resp.json() )
-        .then( resolve ).catch( reject );
-});
+// const getConcierge = new Promise((resolve, reject) => {
+//     fetch(`${ ws }/readConcierge/0`).then( resp => resp.json() )
+//         .then( resolve ).catch( reject );
+// });
 
 function request( endpoint , configuration, data = {} ){
     return new Promise((resolve, reject) =>{

@@ -36,6 +36,45 @@ $app->get('/userRead', function (Request $request, Response $response, $args) {
     $response->getBody()->write(json_encode($request));
     return $response;
 });
+
+$app->post('/userCreate', function (Request $request, Response $response, $args) {
+    $payload = json_decode($request->getBody());
+    $id = $payload->idUser;
+    $name = $payload->txtName;
+    $password = $payload->password;
+    $image = $payload->image;
+
+    $query = Connection::query("CALL strUserCreateUpdate(?,?,?,?);", [$id, $name, $password, $image]);
+
+    $response->getBody()->write(json_encode($query));
+    return $response;
+});
+
+$app->post('/userLogin', function (Request $request, Response $response, $args) {
+    $payload = json_decode($request->getBody());
+    $userName = $payload->userName;
+
+    $query = Connection::query("CALL strUserLogin(?);", [$userName]);
+
+    $response->getBody()->write(json_encode($query));
+    return $response;
+});
+
+$app->get('/courseRead/{ID}', function (Request $request, Response $response, $args) {
+    $id = $args['ID'];
+    $request = Connection::query("CALL strCoursesRead(?);",[$id]);
+
+    $response->getBody()->write(json_encode($request));
+    return $response;
+});
+
+$app->get('/courseUserRead/{ID}', function (Request $request, Response $response, $args) {
+    $id = $args['ID'];
+    $request = Connection::query("CALL strCoursesUser(?);",[$id]);
+
+    $response->getBody()->write(json_encode($request));
+    return $response;
+});
 # .Services
 $app->run();
 
