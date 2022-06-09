@@ -10,3 +10,13 @@ const getUsers = () => {
 }
 
 getUsers();
+
+const { createApp } = Vue
+
+createApp({
+    data() {
+        return {
+            message: 'Hello Vue!'
+        }
+    }
+}).mount('#app')
